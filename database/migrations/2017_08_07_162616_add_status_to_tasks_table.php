@@ -14,6 +14,12 @@ class AddStatusToTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->string('status');
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
