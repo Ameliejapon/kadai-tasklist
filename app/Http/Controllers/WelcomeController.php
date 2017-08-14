@@ -19,11 +19,11 @@ class WelcomeController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $task = $user->task()->orderBy('created_at', 'desc')->paginate(10);
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
                 'user' => $user,
-                'task' => $task,
+                'tasks' => $tasks,
             ];
         }
         return view('welcome', $data);
