@@ -12,10 +12,14 @@ abstract class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function counts($user) {
-        $count_task = $user->task()->count();
+        $count_tasks = $user->tasks()->count();
+        $count_followings = $user->followings()->count();
+        $count_followers = $user->followers()->count();
         
         return [
-            'count_task' => $count_task,
+            'count_tasks' => $count_tasks,
+            'count_followings' => $count_followings,
+            'count_followers' => $count_followers,
         ];
     }
 }

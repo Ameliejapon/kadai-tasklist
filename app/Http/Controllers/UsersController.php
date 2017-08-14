@@ -23,7 +23,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $task = $user->task()->orderBy('created_at', 'desc')->paginate(10);
-        $count_task = $user->task()->count();
+        $count_tasks = $user->task()->count();
         
         $data = [
             'user' => $user,
@@ -34,4 +34,5 @@ class UsersController extends Controller
         
         return view('users.show', $data);
     }
+    
 }
