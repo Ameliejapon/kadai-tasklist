@@ -2,6 +2,8 @@
 
 @section('content')
     @if (Auth::check())
+    <?php $user = Auth::user(); ?>
+        {{ $user->name }}
         <div class="row">
             <aside class="col-md-4">
                 {!! Form::open(['route' => 'tasks.store']) !!}
@@ -21,7 +23,7 @@
     <div class="center jumbotron">
         <div class="text-center">
             <h1>Welcome to the Tasklist</h1>
-            {!! link_to_route('login.get', 'Login', null, ['class' => 'btn btn-lg btn-primary']) !!}
+            {!! link_to_route('signup.get', '', null, ['class' => 'btn btn-lg btn-primary']) !!}
         </div>
     </div>
     @endif
