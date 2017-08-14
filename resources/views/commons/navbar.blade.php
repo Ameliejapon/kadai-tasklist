@@ -24,6 +24,7 @@
                             </ul>
                         </li>
                     @else
+                        <li>{!! link_to_route('signup.get', 'Signup') !!}</li>
                         <li>{!! link_to_route('login.get', 'Login') !!}</li>
                     @endif
                 </ul>

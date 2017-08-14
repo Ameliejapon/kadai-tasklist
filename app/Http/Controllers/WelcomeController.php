@@ -19,11 +19,11 @@ class WelcomeController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $microposts = $user->tasklist()->orderBy('created_at', 'desc')->paginate(10);
+            $task = $user->task()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
                 'user' => $user,
-                'tasklist' => $tasklist,
+                'task' => $task,
             ];
         }
         return view('welcome', $data);

@@ -22,12 +22,12 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $tasklist = $user->tasklist()->orderBy('created_at', 'desc')->paginate(10);
-        $count_tasklist = $user->tasklist()->count();
+        $task = $user->task()->orderBy('created_at', 'desc')->paginate(10);
+        $count_task = $user->task()->count();
         
         $data = [
             'user' => $user,
-            'tasklist' => $tasklist,
+            'task' => $task,
         ];
         
         $data += $this->counts($user);

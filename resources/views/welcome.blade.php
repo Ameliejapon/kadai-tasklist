@@ -4,7 +4,7 @@
     @if (Auth::check())
         <div class="row">
             <aside class="col-md-4">
-                {!! Form::open(['route' => 'tasklist.store']) !!}
+                {!! Form::open(['route' => 'tasks.store']) !!}
                     <div class="form-group">
                         {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '5']) !!}
                     </div>
@@ -12,8 +12,8 @@
                 {!! Form::close() !!}
             </aside>
             <div class="col-xs-8">
-                @if (count($tasklist) > 0)
-                    @include('tasklist.tasklist', ['tasklist' => $tasklist])
+                @if (count($tasks) > 0)
+                    @include('tasks.tasks', ['tasks' => $tasks])
                 @endif
             </div>
         </div>
