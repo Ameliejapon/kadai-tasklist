@@ -86,4 +86,24 @@ class User extends Model implements AuthenticatableContract,
     public function is_following($userId) {
         return $this->followings()->where('follow_id', $userId)->exists();
     }
+    public function feed_tasks()
+    {
+        $follow_user_ids = $this->followings()->lists('users.id')->toArray();
+        $follow_user_ids[] = $this->id;
+        return Tasklist::whereIn('user_id', $follow_user_ids);
+    }
+    public function index()
+    {
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->feed_tasks()->orderBy('created_at', 'desc')->paginate(10);
+            
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+        }
+        return view('welcome', $data);
+    }
 }
