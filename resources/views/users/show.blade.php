@@ -14,12 +14,12 @@
         </aside>
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">Tasklist <span class="badge">{{ $count_tasklist }}</span></a></li>
+                <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">Task <span class="badge">{{ $count_task }}</span></a></li>
                 <li><a href="#">Followings</a></li>
                 <li><a href="#">Followers</a></li>
             </ul>
-            @if (count($tasklist) > 0)
-                @include('tasklist.tasklist', ['tasklist' => $tasklist])
+            @if (count($tasks) > 0)
+                @include('task.task', ['task' => $task])
             @endif
         </div>
     </div>
