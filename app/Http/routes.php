@@ -13,8 +13,6 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::resource('tasks', 'TasksController');
-
 // ログイン認証
 Route::get('login', 'Auth\AuthController@getLogin')->name('login.get');
 Route::post('login', 'Auth\AuthController@postLogin')->name('login.post');
