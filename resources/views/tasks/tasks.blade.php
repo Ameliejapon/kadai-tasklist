@@ -1,20 +1,20 @@
 <ul class="media-list">
 @foreach ($tasks as $task)
-    <?php $user = $tasks->user; ?>
+    <?php $user = $task->user; ?>
     <li class="media">
         <div class="media-left">
             <img class="media-object img-rounded" src="{{ Gravatar::src($user->email, 50) }}" alt="">
         </div>
         <div class="media-body">
             <div>
-                {!! link_to_route('users.show', $user->name) !!} <span class="text-muted">posted at {{ $tasks->created_at }}</span>
+                {!! link_to_route('users.show', $user->name, ['id' => $user->id]) !!} <span class="text-muted">posted at {{ $task->created_at }}</span>
             </div>
             <div>
-                <p>{!! nl2br(e($tasks->content)) !!}</p>
+                <p>{!! nl2br(e($task->content)) !!}</p>
             </div>
             <div>
-                @if (Auth::user()->id == $tasks->user_id)
-                    {!! Form::open(['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
+                @if (Auth::user()->id == $task->user_id)
+                    {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
@@ -23,4 +23,4 @@
     </li>
 @endforeach
 </ul>
-{!! $task->render() !!}
+{!! $tasks->render() !!}
