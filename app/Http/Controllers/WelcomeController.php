@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Task;
-
-class TasksController extends Controller
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +16,17 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('tasks.index', [
-            'tasks' => $tasks,
-        ]);
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+        }
+        return view('welcome', $data);
     }
 
     /**
@@ -48,15 +52,13 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'status' => 'required|max:255', 
             'content' => 'required|max:255',
         ]);
         
         $request->user()->tasks()->create([
             'content' => $request->content,
-            'status' => $request->status,
         ]);
-
+        
         return redirect('/');
     }
 
@@ -100,7 +102,7 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'status' => 'required|max:255',
+            'status' => 'required|max:10',
             'content' => 'required|max:255',
         ]);
         
