@@ -2,6 +2,7 @@
 
 @section('content')
     @if (Auth::check())
+
     <?php $user = Auth::user(); ?>
         {{ $user->name }}
         <div class="row">
@@ -17,6 +18,7 @@
                 @if (count($tasks) > 0)
                     @include('tasks.tasks', ['tasks' => $tasks])
                 @endif
+
             </div>
         </div>
     @else
