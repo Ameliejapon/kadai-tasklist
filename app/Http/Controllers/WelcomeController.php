@@ -127,4 +127,6 @@ class WelcomeController extends Controller
 
         return redirect('/');
     }
+
 }
+

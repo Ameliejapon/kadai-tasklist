@@ -26,5 +26,17 @@ class UsersController extends Controller
         return view('users.show', [
             'user' => $user,
         ]);
+
+        $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+        $count_tasks = $user->tasks()->count();
+        
+        $data = [
+            'user' => $user,
+            'tasks' => $tasks,
+        ];
+        
+        $data += $this->counts($user);
+        
+        return view('users.show', $data);
     }
 }
